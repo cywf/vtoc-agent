@@ -1,0 +1,8 @@
+{
+  "status": "no-release",
+  "version": null,
+  "supportedBoard": "Heltec WiFi LoRa 32 V3",
+  "sha256": null,
+  "recoveryImage": null,
+  "releaseNotes": "No firmware release is published. Physical-board recovery validation is required before flashing is enabled."
+}
