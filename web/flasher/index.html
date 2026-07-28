@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="VTOC Agent release and recovery flasher." />
+    <title>VTOC Agent Flasher</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Heltec WiFi LoRa 32 V3</p>
+      <h1>VTOC Agent Flasher</h1>
+      <p class="lede">A recovery-safe release page. You always select and authorize the serial port; this site never flashes a device silently.</p>
+      <section aria-labelledby="release-title">
+        <h2 id="release-title">Release status</h2>
+        <dl id="release" aria-live="polite"><dt>Status</dt><dd>Loading manifest…</dd></dl>
+      </section>
+      <section aria-labelledby="device-title">
+        <h2 id="device-title">Browser and device check</h2>
+        <p id="browser-status">Checking Web Serial availability…</p>
+        <button id="select-port" type="button" disabled>Select serial port</button>
+        <p class="hint">Selecting a port only identifies a user-authorized device. Flashing remains disabled until a verified release and recovery image are published.</p>
+      </section>
+      <section class="warning" aria-labelledby="recovery-title">
+        <h2 id="recovery-title">Recovery requirement</h2>
+        <p>Do not flash a device until the exact board profile, serial recovery procedure, release checksum, and recovery image have all passed physical-board validation.</p>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
