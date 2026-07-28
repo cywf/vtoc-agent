@@ -9,6 +9,7 @@
 #include "nvs_flash.h"
 
 #include "heltec_v3_display_probe.h"
+#include "heltec_v3_oled_console.h"
 
 static const char *TAG = "vtoc-bringup";
 
@@ -47,6 +48,9 @@ void app_main(void) {
     esp_err_t provisioning_result = initialize_known_provisioning_state();
 #if CONFIG_HUGINN_DISPLAY_PROBE
     esp_err_t display_probe_result = huginn_heltec_v3_display_probe();
+#elif CONFIG_HUGINN_OLED_CONSOLE
+    esp_err_t display_probe_result = huginn_heltec_v3_oled_console_start(
+        image_role(), flash_result == ESP_OK && provisioning_result == ESP_OK);
 #else
     esp_err_t display_probe_result = ESP_OK;
     ESP_LOGI(TAG, "HUGINN_BOARD_PROFILE=heltec-wifi-lora-32-v3");

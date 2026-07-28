@@ -36,4 +36,13 @@ config HUGINN_DISPLAY_PROBE
         status LED, and it does not assume an OLED address or electrical
         polarity. No acknowledgement is reported as a valid probe outcome.
 
+config HUGINN_OLED_CONSOLE
+    bool "Heltec V3 OLED operational console"
+    depends on HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
+    help
+        Enable the verified V3 OLED power, reset, address discovery, and
+        status-console renderer in the base image. The console reports only
+        local, verified bring-up state; it does not enable radios, networking,
+        remote control, or credentials.
+
 endmenu
