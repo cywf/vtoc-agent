@@ -41,6 +41,10 @@ flash by itself.
   `docs/heltec-v3-display-indicator-evidence.md`. It documents the official
   V3/V3.1 candidate mapping while preserving the unverified physical revision,
   I2C address, and electrical polarities.
+- Bounded display-probe profile: documented in
+  `docs/heltec-v3-display-probe.md`. The base role can scan only the documented
+  display I2C bus without driving reset, display power, or LED pins; it has not
+  been flashed or physically exercised on this board.
 - SX1262 routing and regional configuration: unverified; no radio driver or
   regional configuration is enabled by the bring-up image.
 - Battery ADC calibration behavior: unverified; no ADC configuration is enabled

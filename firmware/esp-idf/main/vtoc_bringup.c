@@ -8,6 +8,8 @@
 #include "esp_system.h"
 #include "nvs_flash.h"
 
+#include "heltec_v3_display_probe.h"
+
 static const char *TAG = "vtoc-bringup";
 
 static const char *image_role(void) {
@@ -43,6 +45,13 @@ void app_main(void) {
     uint32_t flash_bytes = 0;
     esp_err_t flash_result = esp_flash_get_size(NULL, &flash_bytes);
     esp_err_t provisioning_result = initialize_known_provisioning_state();
+#if CONFIG_HUGINN_DISPLAY_PROBE
+    esp_err_t display_probe_result = huginn_heltec_v3_display_probe();
+#else
+    esp_err_t display_probe_result = ESP_OK;
+    ESP_LOGI(TAG, "HUGINN_BOARD_PROFILE=heltec-wifi-lora-32-v3");
+    ESP_LOGI(TAG, "HUGINN_DISPLAY_PROBE=disabled");
+#endif
 
     ESP_LOGI(TAG, "HUGINN_VERSION=0.1.0-bringup");
     ESP_LOGI(TAG, "HUGINN_IMAGE_ROLE=%s", image_role());
@@ -53,5 +62,8 @@ void app_main(void) {
     ESP_LOGI(TAG, "HUGINN_FREE_HEAP=%" PRIu32, esp_get_free_heap_size());
     ESP_LOGI(TAG, "HUGINN_PROVISIONING=%s", esp_err_to_name(provisioning_result));
     ESP_LOGI(TAG, "HUGINN_SELF_TEST=%s",
-             (flash_result == ESP_OK && provisioning_result == ESP_OK) ? "PASS" : "FAIL");
+             (flash_result == ESP_OK && provisioning_result == ESP_OK &&
+              display_probe_result == ESP_OK)
+                 ? "PASS"
+                 : "FAIL");
 }

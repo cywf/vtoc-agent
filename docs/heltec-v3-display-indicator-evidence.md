@@ -50,14 +50,22 @@ mode for this product family.
   is the documented logical control, but these physical characteristics are not
   established here.
 
+## Reviewed bounded display probe
+
+The implementation contract for the next reviewed base-image probe is in
+[`docs/heltec-v3-display-probe.md`](heltec-v3-display-probe.md). It scans only
+the documented I2C bus and reports acknowledgements over serial. It preserves
+the unresolved address and electrical-polarity facts below by not driving reset,
+display power, or the status LED.
+
 ## Safe next physical probe
 
-Build a reviewed serial-only probe image that does only the following: logs its
-V3 profile, drives GPIO36 only after the matching schematic establishes its
-polarity, releases and resets GPIO21, scans only the dedicated GPIO17/GPIO18
-I2C bus, and prints discovered addresses. Do not add network, LoRa, Bluetooth,
-or external-device logic. A separate reviewed indicator test may then pulse
-GPIO35 with bounded timing while an operator observes the board.
+Flash the reviewed serial-only probe image only in a separately authorized
+physical-validation session. It logs its V3 profile, does not drive GPIO36 or
+GPIO21, scans only the dedicated GPIO17/GPIO18 I2C bus, and prints discovered
+addresses. Do not add network, LoRa, Bluetooth, or external-device logic. A
+separate reviewed indicator test may later pulse GPIO35 with bounded timing
+while an operator observes the board.
 
 ## Current firmware observation
 

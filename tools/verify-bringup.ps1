@@ -13,6 +13,16 @@ try {
         Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json | Out-Null
     }
     & (Join-Path $PSScriptRoot 'build-bringup-images.ps1') -Role all
+    $expectedDisplayProbe = @{
+        base = 'CONFIG_HUGINN_DISPLAY_PROBE=y'
+        recovery = '# CONFIG_HUGINN_DISPLAY_PROBE is not set'
+    }
+    foreach ($role in $expectedDisplayProbe.Keys) {
+        $sdkconfigPath = Join-Path $repoRoot "firmware/esp-idf/build-$role/sdkconfig"
+        if (-not (Select-String -LiteralPath $sdkconfigPath -SimpleMatch -Quiet $expectedDisplayProbe[$role])) {
+            throw "Unexpected display probe configuration for role $role."
+        }
+    }
     $releaseInput = Get-Content -LiteralPath (Join-Path $repoRoot 'artifacts/release-manifest-input.json') -Raw | ConvertFrom-Json
     if ($releaseInput.board -ne 'Heltec WiFi LoRa 32 V3' -or $releaseInput.bundles.Count -ne 2) {
         throw 'Release manifest input is incomplete.'
