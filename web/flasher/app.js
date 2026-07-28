@@ -23,6 +23,19 @@ async function loadManifest() {
   const response = await fetch('./releases/manifest.json', { cache: 'no-store' });
   if (!response.ok) throw new Error('Release manifest is unavailable.');
   const manifest = await response.json();
+  const noRelease = manifest.status === 'no-release'
+    && manifest.version === null
+    && manifest.sha256 === null
+    && manifest.recoveryImage === null;
+  const reviewableRelease = manifest.status === 'ready-for-review'
+    && typeof manifest.version === 'string'
+    && typeof manifest.firmwareImage === 'string'
+    && /^[a-f0-9]{64}$/i.test(manifest.sha256)
+    && typeof manifest.recoveryImage === 'string'
+    && typeof manifest.recoveryEvidence === 'string';
+  if (!noRelease && !reviewableRelease) {
+    throw new Error('Release manifest is incomplete or unsupported. Flashing remains disabled.');
+  }
   renderManifest(manifest);
   return manifest;
 }
