@@ -1,4 +1,4 @@
-//! Hardware-neutral OLED content for the first VTOC Agent profile.
+//! Hardware-neutral OLED content for the first Huginn profile.
 //!
 //! Board bring-up owns the eventual display driver and pin mapping. This module
 //! owns only the truthful, bounded state that the driver may render.
@@ -42,7 +42,7 @@ pub struct DisplayState {
 impl DisplayState {
     pub fn frame(self) -> DisplayFrame {
         let (title, primary) = match self.mode {
-            DisplayMode::Standalone => ("VTOC Agent", "Local control ready"),
+            DisplayMode::Standalone => ("Huginn", "Local control ready"),
             DisplayMode::Sentinel => ("Sentinel", "Local observations"),
             DisplayMode::Ragnar => ("Ragnar", "Remote job status"),
             DisplayMode::Intercept => ("Intercept", "Remote job status"),
@@ -72,7 +72,7 @@ mod tests {
     #[test]
     fn each_supported_mode_has_a_distinct_title() {
         let modes = [
-            (DisplayMode::Standalone, "VTOC Agent"),
+            (DisplayMode::Standalone, "Huginn"),
             (DisplayMode::Sentinel, "Sentinel"),
             (DisplayMode::Ragnar, "Ragnar"),
             (DisplayMode::Intercept, "Intercept"),

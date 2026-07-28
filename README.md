@@ -1,11 +1,12 @@
 # Huginn
 
-[![CI](https://github.com/cywf/vtoc-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/cywf/vtoc-agent/actions/workflows/ci.yml)
-[![Flasher site](https://img.shields.io/badge/flasher-live-0ea5e9)](https://cywf.github.io/vtoc-agent/)
+[![CI](https://github.com/cywf/huginn/actions/workflows/ci.yml/badge.svg)](https://github.com/cywf/huginn/actions/workflows/ci.yml)
+[![Flasher site](https://img.shields.io/badge/flasher-live-0ea5e9)](https://cywf.github.io/huginn/)
 [![License: GPL--3.0--or--later](https://img.shields.io/badge/license-GPL--3.0--or--later-7c3aed)](LICENSE)
-[![Foundation prerelease](https://img.shields.io/badge/release-v0.1.0--foundation-f59e0b)](https://github.com/cywf/vtoc-agent/releases/tag/v0.1.0-foundation)
+[![Foundation prerelease](https://img.shields.io/badge/release-v0.1.0--foundation-f59e0b)](https://github.com/cywf/huginn/releases/tag/v0.1.0-foundation)
 
-Board-aware companion firmware and companion services for the Heltec WiFi LoRa 32 V3.
+Board-aware firmware, recovery tooling, documentation, and browser flasher for
+the Heltec WiFi LoRa 32 V3.
 
 ## Foundation status
 
@@ -26,7 +27,7 @@ adapter control. External hardware appears unavailable unless verified.
 
 ## Product components
 
-VTOC Agent is one product repository with three cooperating deliverables:
+Huginn owns the device-side product boundary:
 
 1. **Device firmware** - board-aware Rust-first firmware for the Heltec WiFi
    LoRa 32 V3. It owns only verified onboard capabilities, local state,
@@ -35,12 +36,10 @@ VTOC Agent is one product repository with three cooperating deliverables:
    `web/flasher`. It presents releases, recovery instructions, and a
    user-authorized Web Serial path. It never silently selects or flashes a
    device, and it refuses incomplete release metadata.
-3. **VTOC client** - a small containerized sidecar for an authorized host or
-   deployment. It advertises that host's explicitly declared capabilities and
-   exchanges typed results with the VTOC bridge. It is not a general remote
-   control service.
+3. **Product documentation** - board evidence, recovery policy, installation,
+   and the human-facing onboarding contract.
 
-The client may use a declared, verified local transport such as a supported
-USB/UART adapter or authenticated network connection. USB presence or device
-proximity alone never grants a capability: the transport, protocol, power
-behavior, permissions, and policy must be declared and tested first.
+The separate [Muninn](https://github.com/cywf/muninn) repository owns the
+optional desktop companion. Muninn may use a declared, verified local transport
+to a Huginn device, but USB presence or device proximity alone never grants a
+capability.

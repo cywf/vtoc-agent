@@ -26,7 +26,7 @@ state, provisioning state, and self-test result.
 
 ## Recovery and rollback
 
-The recovery image intentionally erases the default VTOC NVS provisioning
+The recovery image intentionally erases the default Huginn NVS provisioning
 partition before initialization. Exercise it only after the base image has
 demonstrated a deliberately invalid configuration state and only with the
 recovery artifact and checksum verified. Flashing the base image again is the
