@@ -70,7 +70,7 @@ flash by itself.
   recovery prerequisite requires an invalid configuration, and this session did
   not authorize inventing or writing a destructive invalid state.
 - Factory reset or serial recovery procedure: recovery image erases the default
-  VTOC NVS provisioning partition before initialization; see
+  Huginn NVS provisioning partition before initialization; see
   `docs/serial-bringup.md`.
 - Recovery result and post-recovery boot log: pending because the required
   invalid-configuration prerequisite was not safely exercised.

@@ -1,4 +1,4 @@
-//! Bounded, board-aware VTOC Agent core.
+//! Bounded, board-aware Huginn core.
 
 pub mod board;
 pub mod display;
