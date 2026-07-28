@@ -78,7 +78,7 @@ impl LocalRulesEngine {
     pub fn state_for(decision: &RuleDecision) -> Option<ResultState> {
         match decision {
             RuleDecision::Unavailable { .. } => Some(ResultState::Unavailable),
-            RuleDecision::Queued(_) => Some(ResultState::Completed),
+            RuleDecision::Queued(_) => Some(ResultState::Queued),
             RuleDecision::NotTriggered | RuleDecision::Disabled => None,
         }
     }
