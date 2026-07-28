@@ -1,0 +1,18 @@
+menu "VTOC Agent image role"
+
+choice VTOC_IMAGE_ROLE
+    prompt "Image role"
+    default VTOC_IMAGE_ROLE_BASE
+    help
+        Select the role compiled into this image. Both images are serial-only
+        and contain no owner configuration or network credentials.
+
+config VTOC_IMAGE_ROLE_BASE
+    bool "Base image"
+
+config VTOC_IMAGE_ROLE_RECOVERY
+    bool "Recovery image"
+
+endchoice
+
+endmenu
