@@ -15,6 +15,8 @@ config HUGINN_IMAGE_ROLE_RECOVERY
 
 endchoice
 
+endchoice
+
 endmenu
 
 menu "Huginn board profile"
@@ -26,6 +28,16 @@ config HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
         Select the verified Heltec WiFi LoRa 32 V3 board profile. This profile
         records only documented candidate wiring and does not enable radio,
         network, display-rendering, or indicator behavior.
+
+choice HUGINN_DISPLAY_MODE
+    prompt "Heltec V3 display behavior"
+    default HUGINN_DISPLAY_DISABLED
+    help
+        Select exactly one display behavior. The base image may select the
+        OLED console; recovery keeps display behavior disabled.
+
+config HUGINN_DISPLAY_DISABLED
+    bool "No display behavior"
 
 config HUGINN_DISPLAY_PROBE
     bool "Bounded Heltec V3 display I2C probe"
@@ -44,5 +56,7 @@ config HUGINN_OLED_CONSOLE
         status-console renderer in the base image. The console reports only
         local, verified bring-up state; it does not enable radios, networking,
         remote control, or credentials.
+
+endchoice
 
 endmenu
