@@ -27,6 +27,16 @@ config HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
         records only documented candidate wiring and does not enable radio,
         network, display-rendering, or indicator behavior.
 
+choice HUGINN_DISPLAY_MODE
+    prompt "Heltec V3 display behavior"
+    default HUGINN_DISPLAY_DISABLED
+    help
+        Select exactly one display behavior. The base image may select the
+        OLED console; recovery keeps display behavior disabled.
+
+config HUGINN_DISPLAY_DISABLED
+    bool "No display behavior"
+
 config HUGINN_DISPLAY_PROBE
     bool "Bounded Heltec V3 display I2C probe"
     depends on HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
@@ -35,5 +45,16 @@ config HUGINN_DISPLAY_PROBE
         acknowledgements. The probe does not drive OLED power, reset, or the
         status LED, and it does not assume an OLED address or electrical
         polarity. No acknowledgement is reported as a valid probe outcome.
+
+config HUGINN_OLED_CONSOLE
+    bool "Heltec V3 OLED operational console"
+    depends on HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
+    help
+        Enable the verified V3 OLED power, reset, address discovery, and
+        status-console renderer in the base image. The console reports only
+        local, verified bring-up state; it does not enable radios, networking,
+        remote control, or credentials.
+
+endchoice
 
 endmenu
