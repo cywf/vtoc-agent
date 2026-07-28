@@ -1,0 +1,7 @@
+**/target/
+/.env
+/.env.*
+!.env.example
+/release/*.bin
+/release/*.elf
+/release/*.json

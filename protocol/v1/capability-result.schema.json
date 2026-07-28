@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VTOC capability result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "requestId", "capability", "state", "timestamp", "summary"],
+  "properties": {
+    "protocolVersion": { "const": "1" },
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "capability": { "enum": ["device.health", "wifi.observe", "ble.observe", "meshtastic.status", "adapter.health"] },
+    "state": { "enum": ["queued", "running", "completed", "failed", "denied", "timed_out", "stale", "unavailable"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "summary": { "type": "string", "maxLength": 512 }
+  }
+}

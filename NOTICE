@@ -1,0 +1,6 @@
+# Third-party notices
+
+The planned combined firmware will incorporate Meshtastic components under
+GPL-3.0. This foundation includes no Meshtastic source or binaries. Before any
+combined distribution, record the exact upstream revision, patches,
+corresponding source, build scripts, and dependency/license inventory.

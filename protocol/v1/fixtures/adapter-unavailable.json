@@ -1,0 +1,8 @@
+{
+  "protocolVersion": "1",
+  "requestId": "fixture-adapter-unavailable",
+  "capability": "adapter.health",
+  "state": "unavailable",
+  "timestamp": "2026-07-27T00:00:00Z",
+  "summary": "declared external adapter is unavailable"
+}
