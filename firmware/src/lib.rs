@@ -1,6 +1,7 @@
 //! Bounded, board-aware VTOC Agent core.
 
 pub mod board;
+pub mod rules;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Capability {
