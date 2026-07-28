@@ -15,8 +15,6 @@ config HUGINN_IMAGE_ROLE_RECOVERY
 
 endchoice
 
-endchoice
-
 endmenu
 
 menu "Huginn board profile"
