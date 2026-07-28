@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VTOC capability request",
+  "description": "Typed request accepted by the Heltec executor. The request names one board-native observation and never carries shell, radio-driver, or adapter commands.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "requestId", "target", "capability", "issuedAt", "parameters"],
+  "properties": {
+    "protocolVersion": { "const": "1" },
+    "requestId": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "target": { "const": "heltec-wifi-lora-32-v3" },
+    "capability": { "enum": ["device.health", "wifi.observe", "ble.observe", "meshtastic.status", "adapter.health"] },
+    "issuedAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "parameters": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "capability": { "const": "device.health" } }, "required": ["capability"] },
+      "then": { "properties": { "parameters": { "type": "object", "additionalProperties": false, "maxProperties": 0 } } }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "wifi.observe" } }, "required": ["capability"] },
+      "then": {
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": { "maxResults": { "type": "integer", "minimum": 1, "maximum": 50 } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "ble.observe" } }, "required": ["capability"] },
+      "then": {
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": { "maxResults": { "type": "integer", "minimum": 1, "maximum": 50 } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "meshtastic.status" } }, "required": ["capability"] },
+      "then": { "properties": { "parameters": { "type": "object", "additionalProperties": false, "maxProperties": 0 } } }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "adapter.health" } }, "required": ["capability"] },
+      "then": { "properties": { "parameters": { "type": "object", "additionalProperties": false, "maxProperties": 0 } } }
+    }
+  ]
+}
