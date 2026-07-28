@@ -16,3 +16,24 @@ config HUGINN_IMAGE_ROLE_RECOVERY
 endchoice
 
 endmenu
+
+menu "Huginn board profile"
+
+config HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
+    bool "Heltec WiFi LoRa 32 V3"
+    default y
+    help
+        Select the verified Heltec WiFi LoRa 32 V3 board profile. This profile
+        records only documented candidate wiring and does not enable radio,
+        network, display-rendering, or indicator behavior.
+
+config HUGINN_DISPLAY_PROBE
+    bool "Bounded Heltec V3 display I2C probe"
+    depends on HUGINN_BOARD_PROFILE_HELTEC_WIFI_LORA_32_V3
+    help
+        Configure the documented OLED I2C pins and scan the bus for address
+        acknowledgements. The probe does not drive OLED power, reset, or the
+        status LED, and it does not assume an OLED address or electrical
+        polarity. No acknowledgement is reported as a valid probe outcome.
+
+endmenu
