@@ -1,5 +1,10 @@
 # VTOC Agent
 
+[![CI](https://github.com/cywf/vtoc-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/cywf/vtoc-agent/actions/workflows/ci.yml)
+[![Flasher site](https://img.shields.io/badge/flasher-live-0ea5e9)](https://cywf.github.io/vtoc-agent/)
+[![License: GPL--3.0--or--later](https://img.shields.io/badge/license-GPL--3.0--or--later-7c3aed)](LICENSE)
+[![Foundation prerelease](https://img.shields.io/badge/release-v0.1.0--foundation-f59e0b)](https://github.com/cywf/vtoc-agent/releases/tag/v0.1.0-foundation)
+
 Board-aware companion firmware and companion services for the Heltec WiFi LoRa 32 V3.
 
 ## Foundation status
