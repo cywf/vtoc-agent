@@ -1,4 +1,4 @@
-# VTOC Agent
+# Huginn
 
 Board-aware companion firmware and companion services for the Heltec WiFi LoRa 32 V3.
 
@@ -8,7 +8,7 @@ This is a non-flashable foundation. It has no Meshtastic source, radio drivers,
 OTA support, or hardware validation. The first board image will be serial-only,
 versioned, checksummed, and recovery-tested.
 
-The recovery-safe serial bring-up implementation is in
+The recovery-safe Huginn serial bring-up implementation is in
 `firmware/esp-idf/`. It produces base and recovery artifacts only through the
 pinned container contract. It does not authorize a browser or automatic flash;
 see `docs/serial-bringup.md`.

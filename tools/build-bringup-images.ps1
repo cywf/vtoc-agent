@@ -19,7 +19,7 @@ function Build-Image([string]$imageRole) {
     $idfArgs = "-B $buildDir -D SDKCONFIG=$sdkconfig -D SDKCONFIG_DEFAULTS='$defaults'"
     docker run --rm -v "${repoRoot}:/workspace" -w $project $image bash -lc "idf.py $idfArgs fullclean && idf.py $idfArgs build"
     $buildRoot = Join-Path $repoRoot "firmware/esp-idf/$buildDir"
-    $bundleRoot = Join-Path $artifacts "vtoc-agent-0.1.0-bringup-$imageRole"
+    $bundleRoot = Join-Path $artifacts "huginn-0.1.0-bringup-$imageRole"
     if (Test-Path $bundleRoot) {
         Remove-Item -LiteralPath $bundleRoot -Recurse -Force
     }
@@ -28,7 +28,7 @@ function Build-Image([string]$imageRole) {
     $bundleFiles = @(
         [ordered]@{ offset = '0x0'; path = 'bootloader/bootloader.bin'; source = (Join-Path $buildRoot 'bootloader/bootloader.bin') },
         [ordered]@{ offset = '0x8000'; path = 'partition_table/partition-table.bin'; source = (Join-Path $buildRoot 'partition_table/partition-table.bin') },
-        [ordered]@{ offset = '0x10000'; path = 'vtoc_agent_bringup.bin'; source = (Join-Path $buildRoot 'vtoc_agent_bringup.bin') },
+        [ordered]@{ offset = '0x10000'; path = 'huginn_bringup.bin'; source = (Join-Path $buildRoot 'huginn_bringup.bin') },
         [ordered]@{ offset = $null; path = 'flash_args.generated'; source = (Join-Path $buildRoot 'flash_args') },
         [ordered]@{ offset = $null; path = 'flasher_args.generated.json'; source = (Join-Path $buildRoot 'flasher_args.json') }
     )

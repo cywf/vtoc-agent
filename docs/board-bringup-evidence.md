@@ -6,10 +6,10 @@ flash by itself.
 
 ## Candidate identity
 
-- Firmware version and source commit: `0.1.0-bringup`; source commit recorded
+- Huginn firmware version and source commit: `0.1.0-bringup`; source commit recorded
   by the bring-up PR before review.
 - Firmware and recovery-image SHA-256: pending a reviewed CI build artifact.
-  The CI `bringup-images` job emits complete base and recovery flash bundles,
+  The CI `huginn-bringup-bundles` job emits complete base and recovery flash bundles,
   per-file checksums, and `release-manifest-input.json`. Binaries remain
   ignored and are never committed. Copy only reviewed artifact checksums into a
   release manifest after physical recovery evidence is complete.

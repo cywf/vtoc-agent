@@ -1,6 +1,6 @@
-# Serial-only bring-up procedure
+# Huginn serial-only bring-up procedure
 
-This procedure applies only to the first observed Heltec WiFi LoRa 32 V3
+This procedure applies only to the first observed Huginn Heltec WiFi LoRa 32 V3
 candidate and is not an automatic flash instruction.
 
 ## Preconditions
