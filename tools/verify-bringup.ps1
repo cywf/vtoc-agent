@@ -13,14 +13,22 @@ try {
         Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json | Out-Null
     }
     & (Join-Path $PSScriptRoot 'build-bringup-images.ps1') -Role all
-    $expectedDisplayProbe = @{
-        base = 'CONFIG_HUGINN_DISPLAY_PROBE=y'
-        recovery = '# CONFIG_HUGINN_DISPLAY_PROBE is not set'
+    $expectedBoardProfiles = @{
+        base = @(
+            '# CONFIG_HUGINN_DISPLAY_PROBE is not set'
+            'CONFIG_HUGINN_OLED_CONSOLE=y'
+        )
+        recovery = @(
+            '# CONFIG_HUGINN_DISPLAY_PROBE is not set'
+            '# CONFIG_HUGINN_OLED_CONSOLE is not set'
+        )
     }
-    foreach ($role in $expectedDisplayProbe.Keys) {
+    foreach ($role in $expectedBoardProfiles.Keys) {
         $sdkconfigPath = Join-Path $repoRoot "firmware/esp-idf/build-$role/sdkconfig"
-        if (-not (Select-String -LiteralPath $sdkconfigPath -SimpleMatch -Quiet $expectedDisplayProbe[$role])) {
-            throw "Unexpected display probe configuration for role $role."
+        foreach ($expectedSetting in $expectedBoardProfiles[$role]) {
+            if (-not (Select-String -LiteralPath $sdkconfigPath -SimpleMatch -Quiet $expectedSetting)) {
+                throw "Unexpected board-profile configuration for role ${role}: $expectedSetting"
+            }
         }
     }
     $releaseInput = Get-Content -LiteralPath (Join-Path $repoRoot 'artifacts/release-manifest-input.json') -Raw | ConvertFrom-Json
