@@ -13,7 +13,7 @@ flash by itself.
   per-file checksums, and `release-manifest-input.json`. Binaries remain
   ignored and are never committed. Copy only reviewed artifact checksums into a
   release manifest after physical recovery evidence is complete.
-- Date and operator: 2026-07-27; operator identity intentionally omitted.
+- Date and operator: 2026-07-28; operator identity intentionally omitted.
 - Printed board revision and photo reference: unverified. A physical visual
   inspection is still required; no board photo is stored in this repository.
 - Official schematic or board-definition reference:
@@ -31,8 +31,10 @@ flash by itself.
 - CP210 serial port, boot log, and reset/boot procedure: observed CP210x USB
   serial bridge. The local port name and device identifier are intentionally
   omitted. A normal RTS reset produced the ESP32-S3 ROM banner and a
-  `SPI_FAST_FLASH_BOOT` DIO boot sequence. No application output arrived in a
-  passive three-second serial sample.
+  `SPI_FAST_FLASH_BOOT` DIO boot sequence. The corrected base image then
+  reported `HUGINN_VERSION=0.1.0-bringup`, `HUGINN_IMAGE_ROLE=base`,
+  `HUGINN_TARGET=esp32s3`, `HUGINN_FLASH_BYTES=8388608 status=ESP_OK`,
+  `HUGINN_PROVISIONING=ESP_OK`, and `HUGINN_SELF_TEST=PASS`.
 - OLED controller and bus address: unverified; no display driver or pin mapping
   is enabled by the bring-up image.
 - SX1262 routing and regional configuration: unverified; no radio driver or
@@ -40,29 +42,38 @@ flash by itself.
 - Battery ADC calibration behavior: unverified; no ADC configuration is enabled
   by the bring-up image.
 - Flash and RAM report: clean ESP-IDF v5.3.1 container builds select 8 MB flash
-  and disable PSRAM. Base image size is 0x2DC60 and recovery image size is
-  0x2DE10, each leaving 82% of the 1 MB application partition free. Runtime
-  memory report remains pending first authorized serial flash.
+  and disable PSRAM. The corrected base image reports PSRAM unavailable as
+  expected, 393296 bytes of free heap, and a passing self-test. The verified
+  bundle manifest and all component checksums remain CI artifact inputs rather
+  than committed binaries or release metadata.
 
 ## Recovery exercise
 
-- Initial serial flash result: not attempted. Explicit operator confirmation is
-  required immediately before a persistent flash operation.
-- Version shown on serial and OLED: pending flash. OLED remains unverified.
-- Deliberately invalid configuration used: pending; it will be documented only
-  after the base image and checksum are reviewed.
+- Initial serial flash result: the base flash bundle was written through the
+  ESP-IDF-generated arguments. Bootloader, partition table, and application
+  segment hashes were verified by the serial flashing tool. An initial base
+  attempt reached application entry but emitted no application log; the
+  reproducible cause was the serial console being disabled in the committed
+  defaults. The focused console fix produced the successful base boot recorded
+  above.
+- Version shown on serial and OLED: the serial version and self-test are
+  recorded above. OLED remains unverified and unused.
+- Deliberately invalid configuration used: not exercised. The documented
+  recovery prerequisite requires an invalid configuration, and this session did
+  not authorize inventing or writing a destructive invalid state.
 - Factory reset or serial recovery procedure: recovery image erases the default
   VTOC NVS provisioning partition before initialization; see
   `docs/serial-bringup.md`.
-- Recovery result and post-recovery boot log: pending.
-- Separate rollback-image result: pending.
+- Recovery result and post-recovery boot log: pending because the required
+  invalid-configuration prerequisite was not safely exercised.
+- Separate rollback-image result: pending because recovery was not flashed.
 
 ## Review checklist
 
 - [ ] Exact board revision was compared with the official source.
-- [ ] Firmware and recovery checksums were independently verified.
-- [ ] Serial boot log is attached and redacted.
-- [ ] Memory report is attached.
+- [x] Firmware and recovery bundle component checksums were independently verified.
+- [x] Sanitized base serial boot log is recorded.
+- [x] Runtime memory report is recorded.
 - [ ] Invalid-configuration recovery passed on this exact board.
 - [ ] Rollback image was verified on this exact board.
 - [ ] No secrets, private addresses, raw identifiers, or personal locations are attached.
