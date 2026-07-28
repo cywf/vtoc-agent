@@ -37,6 +37,10 @@ flash by itself.
   `HUGINN_PROVISIONING=ESP_OK`, and `HUGINN_SELF_TEST=PASS`.
 - OLED controller and bus address: unverified; no display driver or pin mapping
   is enabled by the bring-up image.
+- Display and indicator research record: see
+  `docs/heltec-v3-display-indicator-evidence.md`. It documents the official
+  V3/V3.1 candidate mapping while preserving the unverified physical revision,
+  I2C address, and electrical polarities.
 - SX1262 routing and regional configuration: unverified; no radio driver or
   regional configuration is enabled by the bring-up image.
 - Battery ADC calibration behavior: unverified; no ADC configuration is enabled
