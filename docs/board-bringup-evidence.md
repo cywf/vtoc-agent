@@ -14,8 +14,8 @@ flash by itself.
   ignored and are never committed. Copy only reviewed artifact checksums into a
   release manifest after physical recovery evidence is complete.
 - Date and operator: 2026-07-28; operator identity intentionally omitted.
-- Printed board revision and photo reference: unverified. A physical visual
-  inspection is still required; no board photo is stored in this repository.
+- Printed board model and revision marking: `WiFi LoRa 32 V3`, physically
+  observed. No private board photo is stored in this repository.
 - Official schematic or board-definition reference:
   `https://docs.heltec.org/en/node/esp32/wifi_lora_32/index.html`. Heltec's
   V3/V4 comparison confirms that V3 uses an ESP32-S3N8-class 8 MB integrated
@@ -37,6 +37,10 @@ flash by itself.
   `HUGINN_PROVISIONING=ESP_OK`, and `HUGINN_SELF_TEST=PASS`.
 - OLED controller and bus address: unverified; no display driver or pin mapping
   is enabled by the bring-up image.
+- Display and indicator research record: see
+  `docs/heltec-v3-display-indicator-evidence.md`. It documents the official
+  V3/V3.1 candidate mapping while preserving the unverified physical revision,
+  I2C address, and electrical polarities.
 - SX1262 routing and regional configuration: unverified; no radio driver or
   regional configuration is enabled by the bring-up image.
 - Battery ADC calibration behavior: unverified; no ADC configuration is enabled
@@ -70,7 +74,7 @@ flash by itself.
 
 ## Review checklist
 
-- [ ] Exact board revision was compared with the official source.
+- [x] Exact printed V3 marking was compared with the official V3 source.
 - [x] Firmware and recovery bundle component checksums were independently verified.
 - [x] Sanitized base serial boot log is recorded.
 - [x] Runtime memory report is recorded.
