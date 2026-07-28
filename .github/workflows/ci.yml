@@ -17,6 +17,8 @@ jobs:
       - run: cargo fmt --manifest-path firmware/Cargo.toml -- --check
       - run: cargo clippy --manifest-path firmware/Cargo.toml -- -D warnings
       - run: cargo test --manifest-path firmware/Cargo.toml
+      - run: python3 -m json.tool protocol/v1/capability-request.schema.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/fixtures/wifi-observation-request.json >/dev/null
       - run: python3 -m json.tool protocol/v1/capability-result.schema.json >/dev/null
       - run: python3 -m json.tool protocol/v1/fixtures/adapter-unavailable.json >/dev/null
       - run: python3 -m json.tool protocol/v1/board-profile.schema.json >/dev/null
