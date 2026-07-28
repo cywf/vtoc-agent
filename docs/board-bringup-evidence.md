@@ -8,11 +8,11 @@ flash by itself.
 
 - Firmware version and source commit: `0.1.0-bringup`; source commit recorded
   by the bring-up PR before review.
-- Firmware and recovery-image SHA-256: base
-  `4FED480D80D36B1B1BD292A398797B668B4983E2FA307DEA6FBB7A091549BF6E`;
-  recovery
-  `CAA22CFAE5693C712BF66C7E201C7AD86E6E1C79A2A68FD349CF3B0B2C067FB6`.
-  Binaries remain ignored and are never committed.
+- Firmware and recovery-image SHA-256: pending a reviewed CI build artifact.
+  The CI `bringup-images` job emits complete base and recovery flash bundles,
+  per-file checksums, and `release-manifest-input.json`. Binaries remain
+  ignored and are never committed. Copy only reviewed artifact checksums into a
+  release manifest after physical recovery evidence is complete.
 - Date and operator: 2026-07-27; operator identity intentionally omitted.
 - Printed board revision and photo reference: unverified. A physical visual
   inspection is still required; no board photo is stored in this repository.
