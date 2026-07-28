@@ -2,6 +2,7 @@
 
 pub mod board;
 pub mod display;
+pub mod rules;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Capability {
@@ -14,6 +15,7 @@ pub enum Capability {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ResultState {
+    Queued,
     Completed,
     Denied,
     Unsupported,
