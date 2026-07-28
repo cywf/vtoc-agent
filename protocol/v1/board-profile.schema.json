@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VTOC board profile fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileId", "displayName", "hardwareEvidenceRequired", "pinMappingAvailable", "otaSupported", "status"],
+  "properties": {
+    "profileId": { "const": "heltec-wifi-lora-32-v3" },
+    "displayName": { "const": "Heltec WiFi LoRa 32 V3" },
+    "hardwareEvidenceRequired": { "const": true },
+    "pinMappingAvailable": { "const": false },
+    "otaSupported": { "const": false },
+    "status": { "const": "unverified" }
+  }
+}

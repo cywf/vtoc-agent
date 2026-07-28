@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VTOC serial recovery fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileId", "recoveryMode", "automaticFlashingAllowed", "otaAllowed", "artifactVersionRecorded", "checksumRecorded", "serialBootLogCaptured", "memoryReportCaptured", "invalidConfigurationRecoveryPassed", "rollbackImageVerified", "status", "reason"],
+  "properties": {
+    "profileId": { "const": "heltec-wifi-lora-32-v3" },
+    "recoveryMode": { "const": "serial-only" },
+    "automaticFlashingAllowed": { "const": false },
+    "otaAllowed": { "const": false },
+    "artifactVersionRecorded": { "type": "boolean" },
+    "checksumRecorded": { "type": "boolean" },
+    "serialBootLogCaptured": { "type": "boolean" },
+    "memoryReportCaptured": { "type": "boolean" },
+    "invalidConfigurationRecoveryPassed": { "type": "boolean" },
+    "rollbackImageVerified": { "type": "boolean" },
+    "status": { "enum": ["blocked", "reviewable"] },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 512 }
+  }
+}

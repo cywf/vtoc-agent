@@ -1,0 +1,14 @@
+{
+  "profileId": "heltec-wifi-lora-32-v3",
+  "recoveryMode": "serial-only",
+  "automaticFlashingAllowed": false,
+  "otaAllowed": false,
+  "artifactVersionRecorded": false,
+  "checksumRecorded": false,
+  "serialBootLogCaptured": false,
+  "memoryReportCaptured": false,
+  "invalidConfigurationRecoveryPassed": false,
+  "rollbackImageVerified": false,
+  "status": "blocked",
+  "reason": "physical-board recovery evidence is incomplete"
+}
