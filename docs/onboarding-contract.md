@@ -40,12 +40,24 @@ what will change, and how to recover if the step fails.
 Before showing an install button, the flasher must:
 
 1. Identify the exact board profile required by the selected release.
-2. Display release version, source reference, checksums, normal image,
+2. Positively verify the selected serial target against that profile before
+   writing. Verification must include the supported chip family and flash
+   layout, plus a signed Huginn board-profile response when firmware capable of
+   providing one is already present. A release must remain blocked when the
+   target cannot be verified to the manifest's requirements.
+3. Display release version, source reference, checksums, normal image,
    recovery image, and recovery instructions.
-3. Explain that the owner must choose the serial device themselves.
-4. Block installation when the manifest, board profile, checksum, or recovery
+4. Explain that the owner must choose the serial device themselves.
+5. Block installation when the manifest, target verification, board profile,
+   checksum, or recovery
    evidence is incomplete.
-5. Offer a clear exit path to the recovery guide if installation is interrupted.
+6. Offer a clear exit path to the recovery guide if installation is interrupted.
+
+For an unprovisioned board where ROM cannot prove an exact board profile, the
+browser flasher must not substitute a guess or a user-selected serial port for
+positive verification. The controlled serial bring-up process remains the
+approved first-install path until a read-only hardware-identification method is
+implemented and reviewed.
 
 After a successful install, the page should say that first boot continues on
 the device's local setup connection. It must not claim that the device is
@@ -61,8 +73,10 @@ clear browser-based setup flow.
 The device must display or make available:
 
 - a recognizable temporary setup-network name;
-- a unique, non-default setup credential or an equivalent physical-owner
-  confirmation mechanism;
+- a unique, non-default WPA2 or WPA3 setup-network credential, delivered to
+  the owner through a device label, QR code, or equivalent protected channel;
+- an HTTPS portal using a per-device certificate, or an equivalently
+  confidential application-layer pairing channel before it accepts secrets;
 - a short instruction to open the local setup page;
 - a recovery instruction when setup cannot start.
 
@@ -81,7 +95,8 @@ actions that preserve safety:
    reset through documented physical recovery.
 3. **Network connection** — select or enter a network, validate the attempt,
    and report success or an actionable failure. Credentials are stored only in
-   protected device configuration.
+   protected device configuration and accepted only through the confidential
+   setup channel.
 4. **Telegram and conversational control** — optionally enter a Telegram bot
    token and authorize the owner chat. Show that the bot is limited to typed
    Huginn capabilities. The token is redacted immediately after submission.
@@ -128,7 +143,8 @@ Before the onboarding flow is released, it must have:
 2. A versioned USB and local-control protocol that identifies the exact board
    and firmware before accepting configuration.
 3. Tests for first-time setup, cancellation, failed network join, failed
-   Telegram pairing, owner reset, and recovery after an interrupted update.
+   Telegram pairing, owner reset, recovery after an interrupted update, wrong
+   target rejection before flashing, and setup-secret confidentiality.
 4. A human-readable quick-start guide tested by someone following it without
    developer-only instructions.
 
