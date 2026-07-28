@@ -19,3 +19,7 @@ jobs:
       - run: cargo test --manifest-path firmware/Cargo.toml
       - run: python3 -m json.tool protocol/v1/capability-result.schema.json >/dev/null
       - run: python3 -m json.tool protocol/v1/fixtures/adapter-unavailable.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/board-profile.schema.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/fixtures/heltec-v3-board-profile.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/serial-recovery.schema.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/fixtures/serial-recovery-blocked.json >/dev/null

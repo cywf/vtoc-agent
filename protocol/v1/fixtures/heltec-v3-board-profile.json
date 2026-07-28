@@ -1,0 +1,8 @@
+{
+  "profileId": "heltec-wifi-lora-32-v3",
+  "displayName": "Heltec WiFi LoRa 32 V3",
+  "hardwareEvidenceRequired": true,
+  "pinMappingAvailable": false,
+  "otaSupported": false,
+  "status": "unverified"
+}

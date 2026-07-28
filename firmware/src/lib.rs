@@ -1,5 +1,7 @@
 //! Bounded, board-aware VTOC Agent core.
 
+pub mod board;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Capability {
     DeviceHealth,
