@@ -1,0 +1,18 @@
+menu "Huginn image role"
+
+choice HUGINN_IMAGE_ROLE
+    prompt "Image role"
+    default HUGINN_IMAGE_ROLE_BASE
+    help
+        Select the role compiled into this image. Both images are serial-only
+        and contain no owner configuration or network credentials.
+
+config HUGINN_IMAGE_ROLE_BASE
+    bool "Base image"
+
+config HUGINN_IMAGE_ROLE_RECOVERY
+    bool "Recovery image"
+
+endchoice
+
+endmenu

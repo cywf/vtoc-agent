@@ -5,3 +5,6 @@
 /release/*.bin
 /release/*.elf
 /release/*.json
+firmware/esp-idf/build-*/
+firmware/esp-idf/sdkconfig
+artifacts/

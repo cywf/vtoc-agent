@@ -1,13 +1,7 @@
-FROM rust:1.78.0-bookworm
+FROM espressif/idf@sha256:cbd8372d48c07151ad6cca54367176bb323ce552688c6dacf167a73dd6c17b36
 
-ENV CARGO_HOME=/usr/local/cargo
-ENV RUSTUP_HOME=/usr/local/rustup
-ENV PATH="${CARGO_HOME}/bin:${PATH}"
-
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates git && rm -rf /var/lib/apt/lists/*
-RUN rustup component add rustfmt clippy
 WORKDIR /workspace
 
-# Lock an immutable base-image digest before the first release branch.
-# Add ESP-IDF only after exact version and board evidence are recorded.
+# ESP-IDF v5.3.1, pinned by immutable image digest. The image builds only the
+# serial-safe ESP32-S3 base and recovery contracts; it does not flash hardware.
 CMD ["bash"]

@@ -1,0 +1,12 @@
+{
+  "espIdf": {
+    "version": "v5.3.1",
+    "image": "espressif/idf@sha256:cbd8372d48c07151ad6cca54367176bb323ce552688c6dacf167a73dd6c17b36"
+  },
+  "esptool": {
+    "version": "4.7.0"
+  },
+  "rust": {
+    "version": "1.78.0"
+  }
+}

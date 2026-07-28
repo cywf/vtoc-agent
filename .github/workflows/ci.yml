@@ -25,3 +25,21 @@ jobs:
       - run: python3 -m json.tool protocol/v1/fixtures/heltec-v3-board-profile.json >/dev/null
       - run: python3 -m json.tool protocol/v1/serial-recovery.schema.json >/dev/null
       - run: python3 -m json.tool protocol/v1/fixtures/serial-recovery-blocked.json >/dev/null
+      - run: python3 -m json.tool protocol/v1/release-manifest.schema.json >/dev/null
+      - run: python3 -m json.tool web/flasher/releases/manifest.json >/dev/null
+
+  huginn-bringup-bundles:
+    needs: core
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify Huginn serial bring-up bundles
+        shell: pwsh
+        run: ./tools/verify-bringup.ps1
+      - name: Upload reviewed build input
+        uses: actions/upload-artifact@v4
+        with:
+          name: huginn-bringup-bundles
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14
