@@ -5,31 +5,30 @@ does not authorize a display probe, GPIO test, radio feature, or firmware flash.
 
 ## Attached-board identity
 
-Read-only serial evidence identifies the attached candidate as an ESP32-S3
-QFN56 with 8 MB embedded quad flash through a CP210x bridge. A normal reset
-reaches `SPI_FAST_FLASH_BOOT`, and the current Huginn base image reports a
-passing serial self-test.
+The observed physical printed model marking is **WiFi LoRa 32 V3**. No private
+photo is retained. Read-only serial evidence independently identifies the board
+as an ESP32-S3 QFN56 with 8 MB embedded quad flash through a CP210x bridge. A
+normal reset reaches `SPI_FAST_FLASH_BOOT`, and the current Huginn base image
+reports a passing serial self-test.
 
-This excludes the documented V4 hardware profile: Heltec's V4 change log says
-V4 moves to ESP32-S3R2, 16 MB external flash, 2 MB PSRAM, and removes CP2102.
-The printed model and revision marking on this physical board have not yet been
-visually read, so this record must not claim V3.1 or V3.2 as an exact observed
-revision. Before implementation, inspect and record the board-side marking and
-select the matching Heltec schematic.
+This is also consistent with, and independently excludes, the documented V4
+hardware profile: Heltec's V4 change log says V4 moves to ESP32-S3R2, 16 MB
+external flash, 2 MB PSRAM, and removes CP2102. The selected sources below are
+the official V3 sources; no V3.1 or V3.2 subrevision is claimed.
 
 ## Official V3 reference set
 
 - [Heltec WiFi LoRa 32 V3 Rev 1.1 datasheet](https://s.heltec.cn/download/WiFi_LoRa_32_V3/HTIT-WB32LA_V3%28Rev1.1%29.pdf)
-- [Heltec V3.1 schematic](https://resource.heltec.cn/download/WiFi_LoRa_32_V3/HTIT-WB32LA%28F%29_V3.1_Schematic_Diagram.pdf)
+- [Heltec V3 schematic](https://resource.heltec.cn/download/WiFi_LoRa_32_V3/HTIT-WB32LA%28F%29_V3_Schematic_Diagram.pdf)
 - [Heltec V3 board definition](https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series/blob/master/variants/heltec_wifi_lora_32_V3/pins_arduino.h)
 - [Heltec WiFi LoRa 32 hardware update log](https://docs.heltec.cn/en/node/esp32/wifi_lora_32/hardware_update_log.html)
 
 The Rev 1.1 datasheet documents an ESP32-S3FN8, CP2102, and a 0.96-inch
-128-by-64 OLED. The V3 board definition and V3.1 schematic agree on the
-candidate GPIO mapping below. Heltec's V3 product support identifies SSD1306
-as the display mode for this product family.
+128-by-64 OLED. The V3 board definition and V3 schematic agree on the GPIO
+mapping below. Heltec's V3 product support identifies SSD1306 as the display
+mode for this product family.
 
-## Conditional mapping for a physically confirmed V3/V3.1 candidate
+## Mapping for the observed V3 board
 
 | Function | Candidate mapping | Evidence |
 | --- | --- | --- |
@@ -43,8 +42,6 @@ as the display mode for this product family.
 
 ## Facts deliberately not assumed
 
-- **Exact printed revision:** not visually observed. Do not reuse the V3.1
-  mapping for a V3.2-marked board until the V3.2 schematic is compared.
 - **OLED I2C address:** not documented in the official V3 sources above. Do
   not hard-code `0x3C` or another address from community examples.
 - **Vext active level:** the schematic identifies GPIO36 as the power-control
@@ -55,13 +52,12 @@ as the display mode for this product family.
 
 ## Safe next physical probe
 
-After the printed revision is confirmed, build a reviewed serial-only probe
-image that does only the following: logs its revision/profile, drives GPIO36
-only after the matching schematic establishes its polarity, releases and resets
-GPIO21, scans only the dedicated GPIO17/GPIO18 I2C bus, and prints discovered
-addresses. Do not add network, LoRa, Bluetooth, or external-device logic. A
-separate reviewed indicator test may then pulse GPIO35 with bounded timing
-while an operator observes the board.
+Build a reviewed serial-only probe image that does only the following: logs its
+V3 profile, drives GPIO36 only after the matching schematic establishes its
+polarity, releases and resets GPIO21, scans only the dedicated GPIO17/GPIO18
+I2C bus, and prints discovered addresses. Do not add network, LoRa, Bluetooth,
+or external-device logic. A separate reviewed indicator test may then pulse
+GPIO35 with bounded timing while an operator observes the board.
 
 ## Current firmware observation
 
